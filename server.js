@@ -13,7 +13,7 @@ app.get('*', (req, res) => {
   res.send('Welcome');
 })
 
-app.post('*', (req, res) => {
+app.post('/', (req, res) => {
   let {sessionId, serviceCode, phoneNumber, text} = req.body;
   if(text == '') {
     // First response, note how we start the response with CON
@@ -45,6 +45,26 @@ app.post('*', (req, res) => {
     res.send(response)
   } else {
     res.status(400).send('Bad request')
+  }
+})
+
+app.post('/test', (req, res) => {
+  let {sessionId, serviceCode, phoneNumber, text} = req.body;
+  if (text == '') {
+    let response = `CON Welcome to FoodBank
+    Select Food Bundle
+    1. Rice
+    2. Oil
+    3. Flour`
+    res.send(response);
+  } else if (text == '1*1') {
+    let response = `CON You chose Rice
+    Please select payment method
+    1. Credit Card
+    2. Debit Card`
+    res.send(response)
+  } else {
+    res.status(400).send('Bad stuff')
   }
 })
 
