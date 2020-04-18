@@ -57,7 +57,7 @@ app.post('/test', (req, res) => {
     2. Oil
     3. Flour`
     res.send(response);
-  } else if (text == '1*1') {
+  } else if (text == '1') {
     let response = `CON You chose Rice
     Please select payment method
     1. Credit Card
