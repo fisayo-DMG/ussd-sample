@@ -26,6 +26,7 @@ app.post('*', (req, res) => {
   let response = `CON Choose account information you want to view
   1. Account number
   2. Account balance`
+  res.send(response)
   } else if (text == '2') {
     // Businsess logic for first level response
     let response = `END Your phone number is ${phoneNumber}`;
