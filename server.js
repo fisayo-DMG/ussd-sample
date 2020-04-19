@@ -70,7 +70,7 @@ app.post('/test', (req, res) => {
 
 app.post('/symptoms-checker', (req, res) => {
   let {sessionId, serviceCode, phoneNumber, text} = req.body;
-  if (text === '') {
+  if (text == '') {
     let response = `COM Welcome to Symptoms Checker
     Have you travelled to Lagos, Abuja, or any place known
     to have high number of confirmed cases in the last 14 days
