@@ -64,7 +64,21 @@ app.post('/test', (req, res) => {
     2. Debit Card`
     res.send(response)
   } else {
-    res.status(400).send('Bad stuff')
+    res.status(400).send('Bad request')
+  }
+})
+
+app.post('/symptoms-checker', (req, res) => {
+  let {sessionId, serviceCode, phoneNumber, text} = req.body;
+  if (text === '') {
+    let response = `COM Welcome to Symptoms Checker
+    Have you travelled to Lagos, Abuja, or any place known
+    to have high number of confirmed cases in the last 14 days
+    1. Yes
+    2. No`
+    res.send(response);
+  } else {
+    res.status(400).send('Bad request')
   }
 })
 
