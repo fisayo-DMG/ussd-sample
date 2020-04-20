@@ -4,6 +4,7 @@ const logger = require('morgan');
 const PORT = process.env.PORT || 4040;
 let houseAddress = null;
 let pin = null;
+let tester = null;
 
 const app = express();
 
@@ -60,6 +61,7 @@ app.post('/foodbank', async (req, res) => {
     2. Subscribe to a package`
     res.send(response);
   } else if (text == '1') {
+    console.log("TEXT: ", text)
     let response = `CON Select a package to view
     1. Basket for 1 person
     2. Basket for 2 people
@@ -69,6 +71,9 @@ app.post('/foodbank', async (req, res) => {
     `
     res.send(response)
   } else if (text == '2') {
+    tester = "Test worked"
+    console.log("TESTER: ", tester)
+    console.log("TEXT: ", text)
     let response = `CON Select a package to subscribe to
     1. Basket for 1 person
     2. Basket for 2 people
@@ -78,6 +83,7 @@ app.post('/foodbank', async (req, res) => {
     `
     res.send(response);
   } else if (text == '2*1') {
+    console.log("TEXT: ", text)
     let response = `CON You have selected Basket 1
     1. Location 1
     2. Location 2
@@ -87,6 +93,7 @@ app.post('/foodbank', async (req, res) => {
     `
     res.send(response)
   } else if (text == '2*1*1') {
+    console.log("TEXT: ", text)
     let response = `CON You selected Location 1
     Please choose from selected dates
     1. 1st April
@@ -99,13 +106,20 @@ app.post('/foodbank', async (req, res) => {
   } else if (text == '2*1*1*1') {
     let temp = text;
     text = ''
+    console.log("TEXT: ", text)
     let response = `CON Please enter your phone number and address
     `
     // should require await here
-    houseAddress = await text;
-    text = temp;
+    // houseAddress = await text;
+    // console.log("ADDRESS: ", houseAddress)
+    // text = temp;
     res.send(response);
-  } else if (houseAddress) {
+    houseAddress = await text;
+    console.log("ADDRESS: ", houseAddress)
+    text = temp;
+    // console.log("Mic Check")
+  } else if (text == '2*1*1*1' && houseAddress) {
+    console.log("TEXT: ", text)
     let response = `CON Please select payment method
     1. Cash on delivery
     2. Mobile money
@@ -118,6 +132,7 @@ app.post('/foodbank', async (req, res) => {
   } else if (text == '2*1*1*1*2') {
     let temp = text;
     text = ''
+    console.log("TEXT: ", text)
     let response = 'CON Please enter your PIN';
     // should require await
     pin = await text
