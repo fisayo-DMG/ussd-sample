@@ -55,7 +55,7 @@ app.post('/foodbank', async (req, res) => {
   // let address = ''
   let {sessionId, serviceCode, phoneNumber, text} = req.body;
   if (text == '') {
-    let response = `CON Welcome to FoodBank
+    let response = `CON Welcome to Food Bank
     Select Food Bundle
     1. View packages
     2. Subscribe to a package`
