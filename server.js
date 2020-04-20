@@ -114,7 +114,7 @@ app.post('/foodbank', async (req, res) => {
     // console.log("ADDRESS: ", houseAddress)
     // text = temp;
     res.send(response);
-    houseAddress = await text;
+    houseAddress = "await text";
     console.log("ADDRESS: ", houseAddress)
     text = temp;
     // console.log("Mic Check")
