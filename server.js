@@ -50,7 +50,7 @@ app.post('/', (req, res) => {
   }
 })
 
-app.post('/foodbank', (req, res) => {
+app.post('/foodbank', async (req, res) => {
   // let address = ''
   let {sessionId, serviceCode, phoneNumber, text} = req.body;
   if (text == '') {
@@ -91,9 +91,9 @@ app.post('/foodbank', (req, res) => {
     Please choose from selected dates
     1. 1st April
     2. 8th April
-    1. 15th April
-    1. 22nd April
-    1. 29th April
+    3. 15th April
+    4. 22nd April
+    5. 29th April
     `
     res.send(response);
   } else if (text == '2*1*1*1') {
@@ -102,7 +102,7 @@ app.post('/foodbank', (req, res) => {
     let response = `CON Please enter your phone number and address
     `
     // should require await here
-    houseAddress = text;
+    houseAddress = await text;
     text = temp;
     res.send(response);
   } else if (houseAddress) {
@@ -120,7 +120,7 @@ app.post('/foodbank', (req, res) => {
     text = ''
     let response = 'CON Please enter your PIN';
     // should require await
-    pin = text
+    pin = await text
     text = temp;
     res.send(response)
   } else if (pin) {
