@@ -2,6 +2,8 @@ const express = require('express');
 const logger = require('morgan');
 
 const PORT = process.env.PORT || 4040;
+let houseAddress = null;
+let pin = null;
 
 const app = express();
 
@@ -48,21 +50,82 @@ app.post('/', (req, res) => {
   }
 })
 
-app.post('/test', (req, res) => {
+app.post('/foodbank', (req, res) => {
+  // let address = ''
   let {sessionId, serviceCode, phoneNumber, text} = req.body;
   if (text == '') {
     let response = `CON Welcome to FoodBank
     Select Food Bundle
-    1. Rice
-    2. Oil
-    3. Flour`
+    1. View packages
+    2. Subscribe to a package`
     res.send(response);
   } else if (text == '1') {
-    let response = `CON You chose Rice
-    Please select payment method
-    1. Credit Card
-    2. Debit Card`
+    let response = `CON Select a package to view
+    1. Basket for 1 person
+    2. Basket for 2 people
+    3. Basket for 3 people
+    4. Basket for 4 people
+    5. Basket for 5 people
+    `
     res.send(response)
+  } else if (text == '2') {
+    let response = `CON Select a package to subscribe to
+    1. Basket for 1 person
+    2. Basket for 2 people
+    3. Basket for 3 people
+    4. Basket for 4 people
+    5. Basket for 5 people
+    `
+    res.send(response);
+  } else if (text == '2*1') {
+    let response = `CON You have selected Basket 1
+    1. Location 1
+    2. Location 2
+    3. Location 3
+    4. Location 4
+    5. Location 5
+    `
+    res.send(response)
+  } else if (text == '2*1*1') {
+    let response = `CON You selected Location 1
+    Please choose from selected dates
+    1. 1st April
+    2. 8th April
+    1. 15th April
+    1. 22nd April
+    1. 29th April
+    `
+    res.send(response);
+  } else if (text == '2*1*1*1') {
+    let temp = text;
+    text = ''
+    let response = `CON Please enter your phone number and address
+    `
+    // should require await here
+    houseAddress = text;
+    text = temp;
+    res.send(response);
+  } else if (houseAddress) {
+    let response = `CON Please select payment method
+    1. Cash on delivery
+    2. Mobile money
+    `
+    houseAddress = null;
+    res.send(response);
+  } else if (text == '2*1*1*1*1') {
+    let response = 'END Thank you'
+    res.send(response);
+  } else if (text == '2*1*1*1*2') {
+    let temp = text;
+    text = ''
+    let response = 'CON Please enter your PIN';
+    // should require await
+    pin = text
+    text = temp;
+    res.send(response)
+  } else if (pin) {
+    let response = 'END PIN recieved, Thank you'
+    res.send(response);
   } else {
     res.status(400).send('Bad request')
   }
@@ -81,5 +144,7 @@ app.post('/symptoms-checker', (req, res) => {
     res.status(400).send('Bad request')
   }
 })
+
+
 
 app.listen(PORT, () => console.log(`Server running on PORT ${PORT}`))
