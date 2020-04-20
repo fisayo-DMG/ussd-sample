@@ -102,8 +102,9 @@ app.post('/foodbank', async (req, res) => {
     4. 22nd April
     5. 29th April
     `
+    houseAddress = 'stuff';
     res.send(response);
-  } else if (text == '2*1*1*1') {
+  } else if (text == '2*1*1*1*4') {
     let temp = text;
     text = ''
     console.log("TEXT: ", text)
@@ -114,7 +115,7 @@ app.post('/foodbank', async (req, res) => {
     // console.log("ADDRESS: ", houseAddress)
     // text = temp;
     res.send(response);
-    houseAddress = "await text";
+    // houseAddress = "await text";
     console.log("ADDRESS: ", houseAddress)
     text = temp;
     // console.log("Mic Check")
